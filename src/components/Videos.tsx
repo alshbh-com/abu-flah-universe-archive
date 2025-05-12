@@ -3,7 +3,7 @@ import { useState } from "react";
 import { featuredVideos, allVideos } from "@/data/abuflah";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Eye } from "lucide-react";
+import { Eye, Youtube } from "lucide-react";
 
 const Videos = () => {
   const [activeTab, setActiveTab] = useState("featured");
@@ -49,9 +49,7 @@ const Videos = () => {
             className="inline-flex items-center mt-2 text-red-600 hover:text-red-800 font-medium"
           >
             <span>القناة الرسمية</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="mr-2 h-4 w-4">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+            <Youtube className="mr-2 h-5 w-5" />
           </a>
         </div>
       </div>
@@ -61,30 +59,45 @@ const Videos = () => {
 
 function renderVideoCards(videos) {
   return videos.map((video) => (
-    <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-shadow border-abu-neon/30 hover:border-abu-neon">
-      <div className="video-thumbnail">
-        <img 
-          src={video.thumbnail || `https://via.placeholder.com/480x270/39FF14/000000?text=فيديو+${video.id}`} 
-          alt={video.title} 
-          className="w-full h-full object-cover"
-        />
-        <div className="play-icon">
-          <div className="w-16 h-16 bg-abu-neon rounded-full flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" className="h-8 w-8">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+    <a 
+      href="https://www.youtube.com/@AboFlah" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      key={video.id}
+      className="block transform transition-transform hover:scale-105"
+    >
+      <Card className="overflow-hidden hover:shadow-lg transition-shadow border-abu-neon/30 hover:border-abu-neon">
+        <div className="video-thumbnail relative">
+          <img 
+            src={video.thumbnail || `https://via.placeholder.com/480x270/39FF14/000000?text=فيديو+${video.id}`} 
+            alt={video.title} 
+            className="w-full h-48 object-cover"
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-16 h-16 bg-abu-neon/80 rounded-full flex items-center justify-center backdrop-blur-sm">
+              <Youtube fill="black" className="h-8 w-8" />
+            </div>
+          </div>
+          
+          {/* Abu Flah's image overlay */}
+          <div className="absolute bottom-2 right-2 w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+            <img 
+              src="https://yt3.googleusercontent.com/ytc/AIdro_k54hytUBzcbMcFYRkzpnQpdDrI_zF8J_cG-DXk=s900-c-k-c0x00ffffff-no-rj" 
+              alt="أبو فله" 
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
-      </div>
-      <CardContent className="p-4">
-        <h3 className="font-bold text-lg line-clamp-2 mb-2">{video.title}</h3>
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{video.description}</p>
-        <div className="flex items-center text-muted-foreground text-sm">
-          <Eye className="h-4 w-4 ml-1" />
-          <span>{video.views}</span>
-        </div>
-      </CardContent>
-    </Card>
+        <CardContent className="p-4">
+          <h3 className="font-bold text-lg line-clamp-2 mb-2">{video.title}</h3>
+          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{video.description}</p>
+          <div className="flex items-center text-muted-foreground text-sm">
+            <Eye className="h-4 w-4 ml-1" />
+            <span>{video.views}</span>
+          </div>
+        </CardContent>
+      </Card>
+    </a>
   ));
 }
 

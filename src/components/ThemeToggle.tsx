@@ -8,15 +8,16 @@ const ThemeToggle = () => {
 
   useEffect(() => {
     // تحقق من إعدادات المتصفح
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     
     if (savedTheme) {
       setTheme(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else if (prefersDark) {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
+    } else {
+      // Set default to light mode
+      setTheme("light");
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   }, []);
 
