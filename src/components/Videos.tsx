@@ -3,26 +3,26 @@ import { useState } from "react";
 import { featuredVideos, allVideos } from "@/data/abuflah";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Eye, Award, ThumbsUp } from "lucide-react";
+import { Eye } from "lucide-react";
 
 const Videos = () => {
   const [activeTab, setActiveTab] = useState("featured");
   const displayVideos = activeTab === "featured" ? featuredVideos : allVideos;
 
   return (
-    <div className="py-16 bg-white rtl">
+    <div className="py-16 bg-background rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">أبرز الفيديوهات</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+          <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl">أبرز الفيديوهات</h2>
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-muted-foreground">
             مجموعة منتقاة من أشهر وأكثر فيديوهات أبو فله مشاهدة
           </p>
         </div>
 
         <Tabs defaultValue="featured" className="mb-8" onValueChange={setActiveTab}>
-          <TabsList className="grid w-full md:w-[400px] mx-auto grid-cols-2">
-            <TabsTrigger value="featured">الفيديوهات المميزة</TabsTrigger>
-            <TabsTrigger value="all">جميع الفيديوهات</TabsTrigger>
+          <TabsList className="grid w-full md:w-[400px] mx-auto grid-cols-2 bg-abu-neon/20">
+            <TabsTrigger value="featured" className="data-[state=active]:bg-abu-neon data-[state=active]:text-black">الفيديوهات المميزة</TabsTrigger>
+            <TabsTrigger value="all" className="data-[state=active]:bg-abu-neon data-[state=active]:text-black">جميع الفيديوهات</TabsTrigger>
           </TabsList>
 
           <TabsContent value="featured" className="mt-6">
@@ -39,7 +39,7 @@ const Videos = () => {
         </Tabs>
 
         <div className="mt-12 text-center">
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             لمشاهدة المزيد من الفيديوهات، يرجى زيارة القناة الرسمية لأبو فله على يوتيوب
           </p>
           <a 
@@ -61,16 +61,16 @@ const Videos = () => {
 
 function renderVideoCards(videos) {
   return videos.map((video) => (
-    <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="relative aspect-video">
-        <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-          <img 
-            src={`https://via.placeholder.com/480x270?text=فيديو+${video.id}`} 
-            alt={video.title} 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" className="h-16 w-16">
+    <Card key={video.id} className="overflow-hidden hover:shadow-lg transition-shadow border-abu-neon/30 hover:border-abu-neon">
+      <div className="video-thumbnail">
+        <img 
+          src={video.thumbnail || `https://via.placeholder.com/480x270/39FF14/000000?text=فيديو+${video.id}`} 
+          alt={video.title} 
+          className="w-full h-full object-cover"
+        />
+        <div className="play-icon">
+          <div className="w-16 h-16 bg-abu-neon rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" className="h-8 w-8">
               <path d="M8 5v14l11-7z" />
             </svg>
           </div>
@@ -78,9 +78,9 @@ function renderVideoCards(videos) {
       </div>
       <CardContent className="p-4">
         <h3 className="font-bold text-lg line-clamp-2 mb-2">{video.title}</h3>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{video.description}</p>
-        <div className="flex items-center text-gray-500 text-sm">
-          <Eye className="h-4 w-4 mr-1" />
+        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{video.description}</p>
+        <div className="flex items-center text-muted-foreground text-sm">
+          <Eye className="h-4 w-4 ml-1" />
           <span>{video.views}</span>
         </div>
       </CardContent>

@@ -16,7 +16,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 120 100% 50%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -64,7 +64,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 120 100% 54%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -122,8 +122,28 @@
     right: -2px;
     bottom: -2px;
     left: -2px;
-    background: linear-gradient(45deg, #FF5733, #33FF57, #3357FF);
+    background: linear-gradient(45deg, #39FF14, #33FF57, #3357FF);
     border-radius: 0.7rem;
     z-index: -1;
+  }
+
+  .video-thumbnail {
+    @apply relative overflow-hidden rounded-md aspect-video;
+  }
+
+  .video-thumbnail img {
+    @apply w-full h-full object-cover transition-transform duration-300;
+  }
+
+  .video-thumbnail:hover img {
+    @apply transform scale-105;
+  }
+
+  .video-thumbnail .play-icon {
+    @apply absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-200;
+  }
+
+  .video-thumbnail:hover .play-icon {
+    @apply opacity-100;
   }
 }

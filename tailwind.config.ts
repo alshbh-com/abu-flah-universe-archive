@@ -72,6 +72,7 @@ export default {
 					accent: '#3357FF',
 					light: '#F8F9FA',
 					dark: '#212529',
+					neon: '#39FF14', // اللون الأخضر الفسفوري
 				}
 			},
 			borderRadius: {
